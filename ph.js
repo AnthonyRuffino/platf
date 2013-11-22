@@ -40,19 +40,6 @@ world = {
 	width: map[0].length,
 	draw : function() {
 		ctx.drawImage(bg,0,0,602,403,0,0,602,403);
-		/*
-		for (var y = 0; y <= map.length-1; y++){
-			for (var x = 0; x <= map[0].length-1; x++){
-				switch (map[y][x]){
-					case 0: drawRect(x*world.cellMultiplier, y*world.cellMultiplier, world.cellSize, "rgb(255,255,255)"); break;
-					case 1: drawRect(x*world.cellMultiplier, y*world.cellMultiplier, world.cellSize, "rgb(60,0,90)"); break;
-					case 3: drawRect(x*world.cellMultiplier, y*world.cellMultiplier, world.cellSize, "rgb(255,255,0)"); break;
-				}
-			}
-		}
-		*/
-
-		
 	}
 }
 
@@ -61,44 +48,61 @@ chel = {
 	y: world.height-2,
 	speed: [0, 0],
 	accel: [0, 0],
-	friction:[0.005,0],
+	friction:[0.01,0],
 	width: 100,
 	height: 100,
 	frames: 4,
 	moved:[false,false],
+	force:[0, 0],
+	mass: 10,
 	img: chelImg,
 	currentFrame: 0,
+	getPos: function(pos){
+		pos = pos || [0, 0];
+		return [Math.floor(this.x+pos[0]), Math.floor(this.y+pos[1])];
+	},
+	getCell: function(dir){
+		if (dir == 'right'){
+			pos = this.getPos([1, 0]);
+			console.log(pos);
+			console.log(map[pos[1]][pos[0]]);
+		}
+	},
 	draw: function(){
-		ctx.drawImage(this.img, 0, this.height*this.currentFrame, this.width, this.height,this.x*world.cellMultiplier, this.y*world.cellMultiplier, world.cellSize, world.cellSize);
-		
-		this.currentFrame++;
-		if (this.currentFrame >= this.frames)		
+		ctx.drawImage(this.img, 0, this.height*Math.floor(this.currentFrame), this.width, this.height,this.x*world.cellMultiplier, this.y*world.cellMultiplier, world.cellSize, world.cellSize);
+		ctx.fillStyle = "#00F";
+		ctx.font = "italic 12pt Arial";
+		ctx.fillText("pos: " + this.getPos(), 20,20);
+		this.currentFrame+=0.25;
+		if (Math.floor(this.currentFrame) >= this.frames)		
 			this.currentFrame = 0;
 	},
 	update: function(){
+
+
+		
 		this.x += this.speed[0];
 		this.y += this.speed[1];
-		this.speed[0] += this.accel[0];
-		this.speed[1] += this.accel[1];
 		
-		if (this.speed[0]>0)
+		if(this.speed[0] >= 0.001){
 			this.speed[0] -= this.friction[0];
-		if (this.speed[0]<0)
+		} else if (this.speed[0] <= -0.001){
 			this.speed[0] += this.friction[0];
-		
-		if (this.accel[0]>0)
-			this.accel[0] -= this.accel[0]/1.2;
-		if (this.accel[0]<0)
-			this.accel[0] += this.accel[0]/1.2;
+		} else {
+			this.speed[0] = 0;
+		}
 
-		this.moved[0] = false;
 	},
 	move: function(dir){
 		if (dir=='right'){
-			if (this.moved[0]==false){
-				this.accel[0]+=0.001;
-				this.moved[0] = true;
-			}
+			this.speed[0] += 0.1;
+			if (this.speed[0] > 0.2)
+				this.speed[0] = 0.2;
+		}
+		if (dir=='left'){
+			this.speed[0] -= 0.06;
+			if (this.speed[0] < -0.2)
+				this.speed[0] = -0.2;
 		}
 	}
 
@@ -107,7 +111,7 @@ chel = {
 
 function doKeyDown(e){
 	switch(e.keyCode){
-		case 37: alert('left'); break;
+		case 37: characters[0].move('left'); break;
 		case 38: alert('Up'); break;
 		case 39: characters[0].move('right'); break;
 		case 40: alert('Down'); break;
