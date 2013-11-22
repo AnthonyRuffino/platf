@@ -32,6 +32,12 @@ boxes.push({
     height: height
 });
 boxes.push({
+	x:0,
+	y:0,
+	width: width,
+	height: 10
+})
+boxes.push({
     x: 0,
     y: height - 2,
     width: width,
@@ -46,7 +52,7 @@ boxes.push({
 
 boxes.push({
     x: 120,
-    y: 10,
+    y: 30,
     width: 80,
     height: 80
 });
@@ -64,6 +70,12 @@ boxes.push({
 });
 boxes.push({
     x: 270,
+    y: 150,
+    width: 40,
+    height: 40
+});
+boxes.push({
+    x: 370,
     y: 150,
     width: 40,
     height: 40
@@ -142,9 +154,9 @@ Emitter.prototype.emitParticle = function(){
 var particles = [];
 var emitters = [new Emitter(new Vector(100,30), Vector.fromAngle(0, 0))]; /////////////Player Emitter
 var maxParticles = 200;
-var emissionRate = 4;
-var particleSize = 1;
-var maxLife = 70;
+var emissionRate = 1;
+var particleSize = 3;
+var maxLife = 20;
 function addNewParticles() {
   // if we're at our max, stop emitting.
   if (particles.length > maxParticles) return;
@@ -186,11 +198,26 @@ function plotParticles(boundsX, boundsY) {
 }
 
 function drawParticles() {
-  ctx.fillStyle = 'rgb(0,0,255)';
+  ctx.fillStyle = 'rgb(255,150,0)';
+  ctx.strokeStyle = 'rgb(255,100,100)';
+  ctx.beginPath();
+  ctx.moveTo(particles[0].position.x||player.position.x, particles[0].position.y||player.position.y);
+ 
+ /// FLAMES
   for (var i = 0; i < particles.length; i++) {
     var position = particles[i].position;
-    ctx.fillRect(position.x, position.y, particleSize, particleSize);
+    ctx.fillRect(position.x, position.y+player.height/2, particleSize, particleSize);
+    //ctx.lineTo(position.x, position.y+player.height/2);
   }
+
+/*  /// Curve 
+  for (var i = 0; i < particles.length-3 ; i+=3) {
+  	ctx.bezierCurveTo(particles[i+1].position.x,particles[i+1].position.y,    
+  						particles[i+2].position.x,particles[i+2].position.y,   
+  						particles[i+3].position.x,particles[i+3].position.y);
+  }
+  ctx.stroke();
+  */
 }
 function updatePr(){
 	addNewParticles();
