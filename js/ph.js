@@ -15,10 +15,16 @@ images = {
     flame_point: new Image()
 
         };
+
 im_col = images.length;
 
 images.flake.src = 'img/flake_blue.png';
 images.flame_point.src = 'img/flame_point.png';
+
+
+im_list = [images.flake, images.flame_point];
+
+
 
 function getRndColor (){
     return colors[Math.floor(Math.random()*colors.length)].color;

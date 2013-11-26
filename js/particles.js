@@ -1,7 +1,7 @@
 
 var particles = [];
 var emitters = []; /////////////Player Emitter
-var maxParticles = 2000;
+var maxParticles = 3000;
 //var emissionRate = 4;
 var particleSize = 3;
 var maxLife = 20;
@@ -41,7 +41,7 @@ Vector.fromAngle = function(angle, magnitude){
 /////////////////////////////////////////////////
 ////////////////   PARTICLE  ////////////////////
 /////////////////////////////////////////////////
-function Particle(point, velocity, acceleration, life, img, immune){
+function Particle(point, velocity, acceleration, life, img, immune, pSize){
 	this.position = point || new Vector(0, 0);
 	this.velocity = velocity || new Vector(0, 0);
 	this.acceleration = acceleration || new Vector(0, 0);
@@ -49,6 +49,8 @@ function Particle(point, velocity, acceleration, life, img, immune){
     this.maxLife = life || 100;
     this.img = img;
     this.immune = immune || 0;
+    this.pSize = pSize;
+    
 }
 Particle.prototype.move = function(){
   this.acceleration.y += gravity/10;
@@ -57,6 +59,27 @@ Particle.prototype.move = function(){
 	this.life--;
     if (this.life<0)
         this.life = 0;
+
+      for (var i = 0; i < boxes.length; i++){
+
+          var dir = colCheck({x:this.position.x,
+                              y:this.position.y,
+                              width: this.pSize.x,
+                              height:this.pSize.y
+                            }, boxes[i]);
+
+            if (dir === "l" || dir === "r") {
+                this.velocity.x = -this.velocity.x;
+            } else if (dir === "b") {
+                this.velocity.y = 0;
+                this.velocity.x *= 0.5;
+                this.life = 0;
+            } else if (dir === "t") {
+                this.velocity.y = -this.velocity.y;
+            }
+
+          }
+
 }
 Particle.prototype.submitToFields = function (fields) {
 
@@ -87,7 +110,7 @@ Particle.prototype.submitToFields = function (fields) {
 /////////////////   EMITTER   ///////////////////
 /////////////////////////////////////////////////
 
-function Emitter(point, velocity, emissionRate, img, life, spread, immune){
+function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize){
 	this.position = point;
 	this.velocity = velocity;
     this.emissionRate = emissionRate||1;
@@ -96,7 +119,8 @@ function Emitter(point, velocity, emissionRate, img, life, spread, immune){
     this.img = img || images.flake;
     this.maxLife = life || maxLife;
     this.immune = immune;
-    console.log(this.immune);
+    this.pSize =  pSize ;
+    
 }
 Emitter.prototype.emitParticle = function(){
 	var angle = this.velocity.getAngle() + this.spread - (Math.random()*this.spread*2);
@@ -107,7 +131,7 @@ Emitter.prototype.emitParticle = function(){
 
 	var velocity = Vector.fromAngle(angle, magnitude);
 
-	return new Particle(position, velocity, undefined, this.maxLife + 20 - (Math.random()*20*2), this.img, this.immune);
+	return new Particle(position, velocity, undefined, this.maxLife + 20 - (Math.random()*20*2), this.img, this.immune, this.pSize);
 }
 
 /////////////////////////////////////////////////
@@ -171,9 +195,9 @@ function drawParticles() {
   ctx.save();
   for (var i = 0; i < particles.length; i++) {
     var position = particles[i].position;
-    
+    var size = particles[i].pSize;
     ctx.globalAlpha = (Math.sqrt(particles[i].life))/particles[i].maxLife;
-    ctx.drawImage(particles[i].img, position.x ,position.y);
+    ctx.drawImage(particles[i].img, position.x ,position.y, size.x, size.y);
     
     //ctx.lineTo(position.x, position.y+player.height/2);
   }

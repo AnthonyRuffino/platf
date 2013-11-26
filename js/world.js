@@ -113,11 +113,13 @@ boxes.push({
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 2, images.flake, 30, null, 1)); // Player
+emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake, 30, null, 1, {x:16, y: 16})); // Player
 
 for (var i = 0; i < 5; i++)
-    emitters.push(new Emitter(new Vector(125+i*9,135), Vector.fromAngle((2*Math.PI*90)/360, 1), 1, images.flame_point, 200, Math.PI/8 )); // Left Flame
+    emitters.push(new Emitter(new Vector(125+i*9,140), Vector.fromAngle((2*Math.PI*90)/360, 1), 1, images.flame_point, 200, Math.PI/8, 0, {x:3, y:3} )); // Left Flame
 
+for (var i = 0; i < 15; i++)
+    emitters.push(new Emitter(new Vector(Math.random()*canvas.width,Math.random()*(canvas.height-40)), Vector.fromAngle((2*Math.PI*90)/360, 1), 1, images.flame_point, 200, Math.PI/8, 0, {x:4, y:4} )); // Left Flame
 
 fields.push(new Field(new Vector(200, 230), -20));
 
