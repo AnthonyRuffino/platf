@@ -57,8 +57,13 @@ function update() {
     emitters[0].position.x = player.x;
     emitters[0].position.y = player.y;
 
+    fields[0].position.x = player.x + player.width/2;
+    fields[0].position.y = player.y;
+
     updatePr();
     drawParticles();
+    fields.forEach(drawCircle);
+    emitters.forEach(drawCircle);
 
     ctx.fill();
     ctx.fillStyle = "red";
