@@ -41,7 +41,7 @@ Vector.fromAngle = function(angle, magnitude){
 /////////////////////////////////////////////////
 ////////////////   PARTICLE  ////////////////////
 /////////////////////////////////////////////////
-function Particle(point, velocity, acceleration, life, img, immune, pSize){
+function Particle(point, velocity, acceleration, life, img, immune, pSize, emitter){
 	this.position = point || new Vector(0, 0);
 	this.velocity = velocity || new Vector(0, 0);
 	this.acceleration = acceleration || new Vector(0, 0);
@@ -50,12 +50,16 @@ function Particle(point, velocity, acceleration, life, img, immune, pSize){
     this.img = img;
     this.immune = immune || 0;
     this.pSize = pSize;
+    this.emitter = emitter;
     
 }
 Particle.prototype.move = function(){
   this.acceleration.y += gravity/10;
 	this.velocity.add(this.acceleration);
 	this.position.add(this.velocity);
+  if (this.emitter == 'player'){
+    this.position.x -= w_move;
+  }
 	this.life--;
     if (this.life<0)
         this.life = 0;
@@ -112,7 +116,7 @@ Particle.prototype.submitToFields = function (fields) {
 /////////////////   EMITTER   ///////////////////
 /////////////////////////////////////////////////
 
-function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize){
+function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize, name){
 	this.position = point;
   this.start_position = {x:0, y:0};
 	this.velocity = velocity;
@@ -123,6 +127,7 @@ function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize
     this.maxLife = life || maxLife;
     this.immune = immune;
     this.pSize =  pSize ;
+    this.name = name || 'noname';
     
 }
 Emitter.prototype.emitParticle = function(){
@@ -134,7 +139,7 @@ Emitter.prototype.emitParticle = function(){
 
 	var velocity = Vector.fromAngle(angle, magnitude);
 
-	return new Particle(position, velocity, undefined, this.maxLife + 20 - (Math.random()*20*2), this.img, this.immune, this.pSize);
+	return new Particle(position, velocity, undefined, this.maxLife + 20 - (Math.random()*20*2), this.img, this.immune, this.pSize, this.name);
 }
 
 /////////////////////////////////////////////////
@@ -201,7 +206,7 @@ function drawParticles() {
     var position = particles[i].position;
     var size = particles[i].pSize;
     ctx.globalAlpha = ((particles[i].life)/2)/particles[i].maxLife;
-    ctx.drawImage(particles[i].img, position.x ,position.y, size.x, size.y);
+    ctx.drawImage(particles[i].img, position.x, position.y, size.x, size.y);
     
     //ctx.lineTo(position.x, position.y+player.height/2);
   }

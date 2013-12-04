@@ -101,7 +101,7 @@ boxes.push({
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake_maroon, 30, null, 1, {x:10, y: 10})); // Player
+emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake_maroon, 30, null, 1, {x:10, y: 10}, 'player')); // Player
 
 for (var i = 0; i < 50; i++){
     emitters.push(new Emitter(new Vector(10+i*50,-10), Vector.fromAngle((2*Math.PI*90)/360, 1), 1, images.flake_white, 700, Math.PI/2, 0, {x:3, y:3} )); // Left Flame

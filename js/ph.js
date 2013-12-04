@@ -12,20 +12,23 @@ colors = [
         ];
 
 images = {
-    flake_white: new Image(),
-    flake_blue : new Image(),
+    bg           : new Image(),
+    flake_white  : new Image(),
+    flake_blue   : new Image(),
     flake_maroon : new Image(),
-    flame_point: new Image()
+    flame_point  : new Image()
 
         };
 
 w_coords = {x:0,y:0};
+w_move = 0;
 
 im_col = images.length;
 
-images.flake_blue.src = 'img/flake_blue.png';
-images.flake_white.src = 'img/flake_white.png';
-images.flame_point.src = 'img/flame_point.png';
+images.bg.src           = 'img/bg.png';
+images.flake_blue.src   = 'img/flake_blue.png';
+images.flake_white.src  = 'img/flake_white.png';
+images.flame_point.src  = 'img/flame_point.png';
 images.flake_maroon.src = 'img/flake_maroon.png';
 
 im_list = [images.flake_white, images.flame_point];

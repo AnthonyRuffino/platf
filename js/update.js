@@ -1,4 +1,5 @@
 function update() {
+    update_world_pos();
     player.running = false;
     // check keys
     if (keys[38] || keys[32]) {
@@ -26,9 +27,12 @@ function update() {
 
     player.velX *= friction;
     player.velY += gravity;
+    
+    /////////////Background/////////////////
     ctx.fillStyle = "rgb(20,20,20)";
     ctx.fillRect(0, 0, width, height);
-    
+    ctx.drawImage(images.bg, 0, 0, width, height);
+    /////////////////////////////////////////
     ctx.beginPath();
     
     player.grounded = false;
@@ -77,7 +81,7 @@ function update() {
     ctx.fillRect(player.x, player.y, player.width, player.height);
 */
     player.draw();
-    update_world_pos();
+    
     for (var i = 1; i < emitters.length; i++){
         emitters[i].position.x = emitters[i].start_position.x+w_coords.x;
     }
