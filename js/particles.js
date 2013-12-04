@@ -78,7 +78,7 @@ Particle.prototype.move = function(){
             } else if (dir === "b") {
                 this.velocity.y = 0;
                 this.velocity.x *= 0.5;
-                this.life = 0;
+                this.life -= 50;
             } else if (dir === "t") {
                 this.velocity.y = -this.velocity.y;
             }
