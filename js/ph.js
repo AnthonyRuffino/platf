@@ -3,6 +3,7 @@
     window.requestAnimationFrame = requestAnimationFrame;
 })();
 
+in_menu = 0;
 colors = [
     {name:"red", color:"rgb(100,0,0)"},
     {name:"black", color:"rgb(0,0,0)"},
@@ -17,6 +18,8 @@ images = {
     flame_point: new Image()
 
         };
+
+w_coords = {x:0,y:0};
 
 im_col = images.length;
 
@@ -59,7 +62,8 @@ var canvas = document.getElementById("canvas"),
                        "img/player/jump_down_right.png",
                        "img/player/jump_up_left.png",
                        "img/player/jump_down_left.png",
-                       "img/player/stay.png"],
+                       "img/player/stay.png",
+                       "img/player/stay_down.png"],
         images      : [],
         draw        : function(){ draw_player(this) }
     },
@@ -87,11 +91,14 @@ canvas.height = height;
 /////////////////////////////////////////////////
 
 
-
+var menu_timer;
 
 
 document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
+    if(in_menu != 0 && e.keyCode==13){
+        in_menu = 0;
+    }
 });
 
 document.body.addEventListener("keyup", function (e) {
@@ -100,5 +107,7 @@ document.body.addEventListener("keyup", function (e) {
 
 
 window.addEventListener("load", function () {
-    update();
+    in_menu = 1;
+    show_start_menu();
+  //  update();
 });

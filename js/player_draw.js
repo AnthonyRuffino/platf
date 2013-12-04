@@ -68,7 +68,10 @@ function draw_player(player){
 
 	    
 	} else { // Stay
-		ctx.drawImage(player.images[6], player.x-player.width/2, player.y, player.width*2, player.height);
+		if (player.velY < 1)
+			ctx.drawImage(player.images[6], player.x-player.width/2, player.y, player.width*2, player.height);
+		else
+			ctx.drawImage(player.images[7], player.x-player.width/2, player.y, player.width*2, player.height);
 	}
 	player.frame+=0.3;
 	    if (player.frame >= 4)

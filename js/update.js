@@ -26,7 +26,7 @@ function update() {
 
     player.velX *= friction;
     player.velY += gravity;
-    ctx.fillStyle = "rgb(50,50,50)";
+    ctx.fillStyle = "rgb(20,20,20)";
     ctx.fillRect(0, 0, width, height);
     
     ctx.beginPath();
@@ -34,7 +34,7 @@ function update() {
     player.grounded = false;
     for (var i = 0; i < boxes.length; i++) {
         ctx.fillStyle = boxes[i].color;
-        ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+        ctx.fillRect(boxes[i].x +w_coords.x, boxes[i].y, boxes[i].width, boxes[i].height);
         
         var dir = colCheck(player, boxes[i]);
 
@@ -45,7 +45,7 @@ function update() {
             player.grounded = true;
             player.jumping = false;
         } else if (dir === "t") {
-            player.velY *= -1;
+            player.velY = 0;
         }
 ////////////////////////////////////////////////////
 
@@ -68,7 +68,7 @@ function update() {
     updatePr();
     drawParticles();
     fields.forEach(drawCircle);
-    emitters.forEach(drawCircle);
+  //  emitters.forEach(drawCircle);
 
     ctx.fill();
    
@@ -77,6 +77,10 @@ function update() {
     ctx.fillRect(player.x, player.y, player.width, player.height);
 */
     player.draw();
+    update_world_pos();
+    for (var i = 1; i < emitters.length; i++){
+        emitters[i].position.x = emitters[i].start_position.x+w_coords.x;
+    }
 
     requestAnimationFrame(update);
 }

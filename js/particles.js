@@ -59,6 +59,7 @@ Particle.prototype.move = function(){
 	this.life--;
     if (this.life<0)
         this.life = 0;
+      pos = this.position;
 
       for (var i = 0; i < boxes.length; i++){
 
@@ -79,6 +80,7 @@ Particle.prototype.move = function(){
             }
 
           }
+        
 
 }
 Particle.prototype.submitToFields = function (fields) {
@@ -112,6 +114,7 @@ Particle.prototype.submitToFields = function (fields) {
 
 function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize){
 	this.position = point;
+  this.start_position = {x:0, y:0};
 	this.velocity = velocity;
     this.emissionRate = emissionRate||1;
 	this.spread = spread || Math.PI / 32;
@@ -144,13 +147,14 @@ function addNewParticles() {
 
   // for each emitter
   for (var i = 0; i < emitters.length; i++) {
-
     // emit [emissionRate] particles and store them in our particles array
-    for (var j = 0; j < emitters[i].emissionRate; j++) {
-      particles.push(emitters[i].emitParticle());
+    pos = emitters[i].position;
+    if  (!(pos.x < 0 || pos.x > width || pos.y < -10 || pos.y > height)){
+      for (var j = 0; j < emitters[i].emissionRate; j++) {
+        particles.push(emitters[i].emitParticle());
     }
-
   }
+}
 }
 
 function plotParticles(boundsX, boundsY) {
@@ -162,7 +166,7 @@ function plotParticles(boundsX, boundsY) {
     var pos = particle.position;
 
     // If we're out of bounds, drop this particle and move on to the next
-    if (pos.x < 0 || pos.x > boundsX || pos.y < 0 || pos.y > boundsY || particle.life <= 0){
+    if (pos.x < 0 || pos.x > boundsX || pos.y < -10 || pos.y > boundsY || particle.life <= 0){
     	continue;
     } 
 
@@ -196,7 +200,7 @@ function drawParticles() {
   for (var i = 0; i < particles.length; i++) {
     var position = particles[i].position;
     var size = particles[i].pSize;
-    ctx.globalAlpha = (Math.sqrt(particles[i].life))/particles[i].maxLife;
+    ctx.globalAlpha = ((particles[i].life)/2)/particles[i].maxLife;
     ctx.drawImage(particles[i].img, position.x ,position.y, size.x, size.y);
     
     //ctx.lineTo(position.x, position.y+player.height/2);
