@@ -116,7 +116,7 @@ function Emitter(point, velocity, emissionRate, img, life, spread, immune, pSize
     this.emissionRate = emissionRate||1;
 	this.spread = spread || Math.PI / 32;
 	this.drawColor = "#999";
-    this.img = img || images.flake;
+    this.img = img || images.flake_blue;
     this.maxLife = life || maxLife;
     this.immune = immune;
     this.pSize =  pSize ;

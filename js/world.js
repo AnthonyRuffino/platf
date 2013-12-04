@@ -113,7 +113,7 @@ boxes.push({
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake, 30, null, 1, {x:16, y: 16})); // Player
+emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake_maroon, 30, null, 1, {x:10, y: 10})); // Player
 
 for (var i = 0; i < 5; i++)
     emitters.push(new Emitter(new Vector(125+i*9,140), Vector.fromAngle((2*Math.PI*90)/360, 1), 1, images.flame_point, 200, Math.PI/8, 0, {x:3, y:3} )); // Left Flame

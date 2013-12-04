@@ -1,5 +1,5 @@
 function update() {
-
+    player.running = false;
     // check keys
     if (keys[38] || keys[32]) {
         // up arrow or space
@@ -11,11 +11,13 @@ function update() {
     }
     if (keys[39]) {
         // right arrow
+        player.running = true;
         if (player.velX < player.speed) {
             player.velX++;
         }
     }
     if (keys[37]) {
+        player.running = true;
         // left arrow
         if (player.velX > -player.speed) {
             player.velX--;
@@ -46,7 +48,7 @@ function update() {
             player.velY *= -1;
         }
 ////////////////////////////////////////////////////
-        
+
             
 
     }
@@ -69,9 +71,12 @@ function update() {
     emitters.forEach(drawCircle);
 
     ctx.fill();
+   
+/*  // Draw player
     ctx.fillStyle = "red";
     ctx.fillRect(player.x, player.y, player.width, player.height);
+*/
+    player.draw();
 
-    
     requestAnimationFrame(update);
 }
