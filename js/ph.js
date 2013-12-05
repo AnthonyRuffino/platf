@@ -6,7 +6,7 @@
 in_menu = 0;
 colors = [
     {name:"red", color:"rgb(100,0,0)"},
-    {name:"black", color:"rgb(0,0,0)"},
+    {name:"black", color:"rgb(30,30,30)"},
     {name:"grey", color:"rgb(100,100,100)"},
     {name:"green", color:"rgb(0,100,0)"}
         ];
@@ -51,7 +51,7 @@ var canvas = document.getElementById("canvas"),
         x           : width / 2,
         y           : height - 15,
         width       : 16,
-        height      : 30,
+        height      : 29,
         speed       : 3,
         velX        : 0,
         velY        : 0,

@@ -80,7 +80,7 @@ Particle.prototype.move = function(){
             } else if (dir === "b") {
                 this.velocity.y = - this.velocity.y*0.1;
                 this.velocity.x *= 0.3;
-                this.life -= 20;
+                this.life -= 40;
             } else if (dir === "t") {
                 this.velocity.y = -this.velocity.y;
             }

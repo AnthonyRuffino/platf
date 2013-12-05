@@ -16,7 +16,7 @@ boxes.push({
     color: getRndColor()
 });
 
-
+/*
 boxes.push({
     x: 120,
     y: 60,
@@ -99,7 +99,7 @@ boxes.push({
     color: getRndColor()
 });
 
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 emitters.push(new Emitter(new Vector(100,30), Vector.fromAngle(0, 0), 1, images.flake_maroon, 30, null, 1, {x:10, y: 10}, 'player')); // Player
 
