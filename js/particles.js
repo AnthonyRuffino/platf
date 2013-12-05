@@ -59,6 +59,8 @@ Particle.prototype.move = function(){
 	this.position.add(this.velocity);
   if (this.emitter == 'player'){
     this.position.x -= w_move;
+  } else {
+    this.position.x -= w_move;
   }
 	this.life--;
     if (this.life<0)
@@ -76,9 +78,9 @@ Particle.prototype.move = function(){
             if (dir === "l" || dir === "r") {
                 this.velocity.x = -this.velocity.x;
             } else if (dir === "b") {
-                this.velocity.y = 0;
-                this.velocity.x *= 0.5;
-                this.life -= 50;
+                this.velocity.y = - this.velocity.y*0.1;
+                this.velocity.x *= 0.3;
+                this.life -= 20;
             } else if (dir === "t") {
                 this.velocity.y = -this.velocity.y;
             }
