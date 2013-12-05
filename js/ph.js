@@ -16,7 +16,8 @@ images = {
     flake_white  : new Image(),
     flake_blue   : new Image(),
     flake_maroon : new Image(),
-    flame_point  : new Image()
+    flame_point  : new Image(),
+    coin         : new Image()
 
         };
 
@@ -30,6 +31,7 @@ images.flake_blue.src   = 'img/flake_blue.png';
 images.flake_white.src  = 'img/flake_white.png';
 images.flame_point.src  = 'img/flame_point.png';
 images.flake_maroon.src = 'img/flake_maroon.png';
+images.coin.src         = 'img/items/coin.png';
 
 im_list = [images.flake_white, images.flame_point];
 
@@ -55,6 +57,8 @@ var canvas = document.getElementById("canvas"),
         speed       : 3,
         velX        : 0,
         velY        : 0,
+        life        : 100,
+        coins       : 0,
         jumping     : false,
         grounded    : false,
         running     : false,
@@ -80,7 +84,8 @@ for (var i = 0; i<player.image_urls.length; i++){
 }
 
 var boxes = []; /// world
-
+var coins = [];
+var enemies = [];
 
 canvas.width = width;
 canvas.height = height;
