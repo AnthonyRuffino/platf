@@ -1,8 +1,7 @@
 var HUD = new hud();
 
-
-//w_coords.x = -200;
-//player.x = 800;
+//w_coords.x = -800;
+player.x = 1200;
 
 function update() {
     update_world_pos();
@@ -77,16 +76,11 @@ function update() {
 
     updatePr();
     
-    //fields.forEach(drawCircle);
 
-  //  emitters.forEach(drawCircle);
 
     ctx.fill();
    
-/*  // Draw player
-    ctx.fillStyle = "red";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-*/
+
     player.draw();
     
     for (var i = 1; i < emitters.length; i++){
@@ -97,7 +91,15 @@ function update() {
         coins[i].checkCol(i);
         
     }
+    
+// LAVA
+    for (var i = 0; i < lava.length; i++) {
+        ctx.drawImage(images.lava, lava[i].x+w_coords.x, lava[i].y, lava[i].width, lava[i].height);
+        particle_bum(lava[i].x+w_coords.x+lava[i].width/2-8, lava[i].y-5, images.steam, {x: 18, y: 18}, 1, 30, 3);
+    }
+
     drawParticles();
+
     HUD.draw();
     requestAnimationFrame(update);
 }

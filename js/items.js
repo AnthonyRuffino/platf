@@ -28,7 +28,7 @@ Coin.prototype.checkCol = function(i){
 		{
 			player.coins++;
 			coins.splice(i,1);
-			particle_bum(this.x*this.blockSize+w_coords.x, this.y*this.blockSize, images.sparkle);
+			particle_bum(this.x*this.blockSize+w_coords.x, this.y*this.blockSize, images.sparkle, {x:5, y:5}, 3, 100, 20);
 			console.log('Coin !')
 		}
 }
