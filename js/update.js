@@ -2,7 +2,7 @@ var HUD = new hud();
 
 //w_coords.x = -800;
 //player.x = 1200;
-
+var _end  = false;
 function update() {
     update_world_pos();
     player.running = false;
@@ -81,7 +81,7 @@ function update() {
     ctx.fill();
    
 
-    player.draw();
+    
     
     for (var i = 1; i < emitters.length; i++){
         emitters[i].position.x = emitters[i].start_position.x+w_coords.x;
@@ -91,6 +91,11 @@ function update() {
         coins[i].checkCol(i);
         
     }
+    for (var i = 0; i < hearts.length; i++) {
+        console.log(hearts.length);
+        hearts[i].draw();
+        hearts[i].checkCol(i);
+    }
     
 // LAVA
     for (var i = 0; i < lava.length; i++) {
@@ -99,12 +104,16 @@ function update() {
     }
 
     drawParticles();
-
+    player.draw();
     if (player.life <= 0) {
             game_over();
             return 0;
         }
 
     HUD.draw();
+    if (_end){
+        show_end();
+        return;
+    }
     requestAnimationFrame(update);
 }

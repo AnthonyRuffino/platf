@@ -20,7 +20,9 @@ images = {
     coin         : new Image(),
     sparkle      : new Image(),
     lava         : new Image(),
-    steam        : new Image()
+    steam        : new Image(),
+    heart        : new Image(),
+    end          : new Image()
 
         };
 
@@ -38,6 +40,8 @@ images.coin.src         = 'img/items/coin.png';
 images.sparkle.src      = 'img/sparkle.png';
 images.lava.src         = 'img/lava.png';
 images.steam.src        = 'img/steam.png';
+images.heart.src        = 'img/items/heart.png';
+images.end.src          = 'img/splash/end.jpg';
 
 im_list = [images.flake_white, images.flame_point];
 
@@ -91,6 +95,7 @@ for (var i = 0; i<player.image_urls.length; i++){
 
 var boxes   = []; /// world
 var coins   = [];
+var hearts  = [];
 var lava    = [];
 var lava_hurt = 0.7
 var enemies = [];

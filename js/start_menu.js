@@ -30,6 +30,18 @@ function game_over(){
     ctx.fillText("F5, чтобы начать заново", width/2, 200);
     ctx.font = 'bold 40px sans-serif';
     ctx.strokeText("GAME OVER", width/2, 150);
+}
 
-  
+function show_end() {
+	_end = true;
+	ctx.fillStyle = "#000000";
+	ctx.fillRect(0,0, width, height);
+	ctx.drawImage(images.end,50,0);
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#ff4444";
+	ctx.strokeStyle = "#FF0";
+    ctx.font = "italic 24pt Arial";
+    ctx.strokeText("С днём рождения, милая !!!", width/2, 250);
+    ctx.fillText("С днём рождения, милая !!!", width/2, 250);
+
 }
