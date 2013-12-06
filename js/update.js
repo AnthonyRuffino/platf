@@ -100,6 +100,11 @@ function update() {
 
     drawParticles();
 
+    if (player.life <= 0) {
+            game_over();
+            return 0;
+        }
+
     HUD.draw();
     requestAnimationFrame(update);
 }

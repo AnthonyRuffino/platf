@@ -92,7 +92,7 @@ for (var i = 0; i<player.image_urls.length; i++){
 var boxes   = []; /// world
 var coins   = [];
 var lava    = [];
-var lava_hurt = 0.5
+var lava_hurt = 0.7
 var enemies = [];
 
 canvas.width = width;

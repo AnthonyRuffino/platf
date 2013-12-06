@@ -36,9 +36,10 @@ Coin.prototype.checkCol = function(i){
 check_lava = function(l) { // Check, if player stay in lava
 	if ( player.x < l.x+l.width+w_coords.x && player.x+player.width > l.x+w_coords.x  && player.y < l.y + l.height && player.y+player.height > l.y)
 		{
-			particle_bum(l.x+w_coords.x+l.width/2-8, l.y-5, images.steam, {x: 18, y: 18}, 1, 30, 8);
+			particle_bum(player.x+player.width/2-8, player.y+5, images.steam, {x: 18, y: 18}, 1, 30, 8);
 			player.life -= lava_hurt;
-			console.log(player.life);
+			if (player.life < 0)
+				player.life = 0;
 		}
 
 }
