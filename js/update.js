@@ -1,5 +1,9 @@
 var HUD = new hud();
-console.log(coins)
+
+
+//w_coords.x = -200;
+//player.x = 800;
+
 function update() {
     update_world_pos();
     player.running = false;
@@ -72,8 +76,9 @@ function update() {
     fields[0].position.y = player.y;
 
     updatePr();
-    drawParticles();
-    fields.forEach(drawCircle);
+    
+    //fields.forEach(drawCircle);
+
   //  emitters.forEach(drawCircle);
 
     ctx.fill();
@@ -92,7 +97,7 @@ function update() {
         coins[i].checkCol(i);
         
     }
-
+    drawParticles();
     HUD.draw();
     requestAnimationFrame(update);
 }

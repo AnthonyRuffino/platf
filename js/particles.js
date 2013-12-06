@@ -144,6 +144,22 @@ Emitter.prototype.emitParticle = function(){
 	return new Particle(position, velocity, undefined, this.maxLife + 20 - (Math.random()*20*2), this.img, this.immune, this.pSize, this.name);
 }
 
+particle_bum = function(x, y, img){
+  console.log('bum');
+  for (var i = 0; i<20; i++) {
+
+    var angle = (-10+i)/10;
+    particles.unshift(new Particle(new Vector(x, y-2), //Pos
+                                Vector.fromAngle(-1.57+angle, 3*Math.random()),     // Speed
+                                undefined,        // Acceleration
+                                100,               //life
+                                img, 
+                                1,                // Immune to player field
+                                {x:5, y:5},               // Size
+                                'coin_bum'));
+  }
+}
+
 /////////////////////////////////////////////////
 ////////////////    CONTAINERS   ////////////////
 /////////////////////////////////////////////////

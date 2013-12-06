@@ -5,9 +5,20 @@ var Coin = function(x, y, blockSize) {
 	this.height = 18;
 	this.blockSize = blockSize;
 	this.img = images.coin;
+	this.frame = Math.floor(Math.random()*4);
 }
 Coin.prototype.draw = function(num){
-	ctx.drawImage(this.img, (this.x)*this.blockSize+w_coords.x, this.y*this.blockSize, this.width, this.height);
+	ctx.drawImage(this.img, 0,
+							32*Math.floor(this.frame),
+							32,
+							32,
+							(this.x)*this.blockSize+w_coords.x, 
+							this.y*this.blockSize, 
+							this.width, 
+							this.height);
+	this.frame+=0.1;
+	if (this.frame > 3)
+		this.frame = 0;
 }
 Coin.prototype.checkCol = function(i){
 		///////////Правее левой границы.......Левее правой границы
@@ -17,6 +28,7 @@ Coin.prototype.checkCol = function(i){
 		{
 			player.coins++;
 			coins.splice(i,1);
+			particle_bum(this.x*this.blockSize+w_coords.x, this.y*this.blockSize, images.sparkle);
 			console.log('Coin !')
 		}
 }

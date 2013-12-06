@@ -17,7 +17,8 @@ images = {
     flake_blue   : new Image(),
     flake_maroon : new Image(),
     flame_point  : new Image(),
-    coin         : new Image()
+    coin         : new Image(),
+    sparkle      : new Image()
 
         };
 
@@ -32,6 +33,7 @@ images.flake_white.src  = 'img/flake_white.png';
 images.flame_point.src  = 'img/flame_point.png';
 images.flake_maroon.src = 'img/flake_maroon.png';
 images.coin.src         = 'img/items/coin.png';
+images.sparkle.src      = 'img/sparkle.png';
 
 im_list = [images.flake_white, images.flame_point];
 
