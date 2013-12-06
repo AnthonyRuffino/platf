@@ -1,7 +1,7 @@
 var HUD = new hud();
 
 //w_coords.x = -800;
-player.x = 1200;
+//player.x = 1200;
 
 function update() {
     update_world_pos();
@@ -95,7 +95,7 @@ function update() {
 // LAVA
     for (var i = 0; i < lava.length; i++) {
         ctx.drawImage(images.lava, lava[i].x+w_coords.x, lava[i].y, lava[i].width, lava[i].height);
-        particle_bum(lava[i].x+w_coords.x+lava[i].width/2-8, lava[i].y-5, images.steam, {x: 18, y: 18}, 1, 30, 3);
+        check_lava(lava[i]);
     }
 
     drawParticles();
