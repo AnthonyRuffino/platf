@@ -2,7 +2,7 @@ function draw_player(player){
 	//ctx.fillStyle = "#ffff00";
    // ctx.fillRect(player.x, player.y, player.width, player.height);
 	if(player.running){
-		if (keys[39]){ // Right pressed
+		if (keys[39] || keys[68] ){ // Right or 'D' pressed
 			if (!player.jumping){ // Just Run
 				ctx.drawImage(player.images[0], 0,
 												32*Math.floor(player.frame), 
@@ -33,7 +33,7 @@ function draw_player(player){
 												player.height);
 			}
 		} else 
-		if (keys[37]){ // LEFT pressed
+		if (keys[37] || keys[65]){ // LEFT pressed
 			if(!player.jumping){ // Just Run
 				ctx.drawImage(player.images[1], 0,
 												32*Math.floor(player.frame), 
