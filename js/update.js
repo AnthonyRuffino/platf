@@ -7,24 +7,24 @@ function update() {
     update_world_pos();
     player.running = false;
     // check keys
-    if (keys[38] || keys[32]) {
-        // up arrow or space
+    if (keys[38] || keys[32] || keys[87]) {
+        // up arrow or space or 'W'
         if (!player.jumping && player.grounded) {
             player.jumping = true;
             player.grounded = false;
             player.velY = -player.speed * 2;
         }
     }
-    if (keys[39]) {
-        // right arrow
+    if (keys[39] || keys[39] || keys[68]) {
+        // right arrow or 'D'
         player.running = true;
         if (player.velX < player.speed) {
             player.velX++;
         }
     }
-    if (keys[37]) {
+    if (keys[37] || keys[65]) {
         player.running = true;
-        // left arrow
+        // left arrow or 'A'
         if (player.velX > -player.speed) {
             player.velX--;
         }
