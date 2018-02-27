@@ -15,7 +15,7 @@ function update() {
             player.velY = -player.speed * 2;
         }
     }
-    if (keys[39] || keys[39] || keys[68]) {
+    if (keys[39] || keys[68]) {
         // right arrow or 'D'
         player.running = true;
         if (player.velX < player.speed) {
